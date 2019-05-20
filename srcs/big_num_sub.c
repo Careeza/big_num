@@ -6,11 +6,19 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:57:10 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 14:05:44 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:47:43 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "num.h"
+
+bool		trunc_zero_at_the_end(t_num **res)
+{
+	while (--(*res)->len > 0 && (*res)->num[(*res)->len] == 0)
+		;
+	(*res)->len++;
+	return (true);
+}
 
 bool		bin_sub(t_num *a, t_num *b, t_num **res, size_t len)
 {
@@ -38,7 +46,7 @@ bool		bin_sub(t_num *a, t_num *b, t_num **res, size_t len)
 		free(sign);
 		(*res)->sign = true;
 	}
-	return (true);
+	return (trunc_zero_at_the_end(res));
 }
 
 static bool	gest_sign_sub(t_num *a, t_num *b, t_num **res)

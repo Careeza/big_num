@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 09:33:43 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 14:58:51 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:40:13 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		main(int argc, const char *argv[])
 			big_num_mult(op1, op2, &op3);
 		if (argv[2][0] == '/')
 			big_num_div(op1, op2, &op3);
+		printf("%ld\n", op3->len);
 		conv_in_int(op3);
 	}
 	else
