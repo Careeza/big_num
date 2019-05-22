@@ -27,6 +27,7 @@ t_num	*copy_num(t_num *num)
 	}
 	copy->len = num->len;
 	copy->sign = num->sign;
+	copy->zero = num->zero;
 	return (copy);
 }
 
@@ -45,5 +46,6 @@ t_num	*copy_reverse_num(t_num *num)
 	}
 	copy->len = num->len;
 	copy->sign = num->sign;
+	copy->zero = num->zero;
 	return (copy);
 }

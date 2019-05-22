@@ -16,6 +16,8 @@ bool		trunc_zero_at_the_end(t_num **res)
 {
 	while (--(*res)->len > 0 && (*res)->num[(*res)->len] == 0)
 		;
+	if ((*res)->len == 0 && (*res)->num[0] == 0)
+		(*res)->zero = true;
 	(*res)->len++;
 	return (true);
 }
@@ -46,6 +48,8 @@ bool		bin_sub(t_num *a, t_num *b, t_num **res, size_t len)
 		free(sign);
 		(*res)->sign = true;
 	}
+	else
+		(*res)->sign = false;
 	return (trunc_zero_at_the_end(res));
 }
 

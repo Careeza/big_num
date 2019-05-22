@@ -7,3 +7,5 @@ SRCS += srcs/big_num_sub.c
 SRCS += srcs/copy.c
 SRCS += srcs/shift.c
 SRCS += srcs/string.c
+SRCS += srcs/big_num_mod.c
+SRCS += srcs/big_num_aff.c

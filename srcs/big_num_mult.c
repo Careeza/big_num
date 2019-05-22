@@ -20,6 +20,12 @@ bool	bin_mult(t_num *a, t_num *b, t_num *c, t_num **res)
 	uint16_t	overflow;
 
 	i = -1;
+	if (a->zero || b->zero)
+	{
+		(*res)->len = 1;
+		(*res)->zero = true;
+		return (true);
+	}
 	while (++i < a->len)
 	{
 		j = -1;

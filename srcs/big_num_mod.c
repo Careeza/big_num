@@ -12,18 +12,15 @@
 
 #include "num.h"
 
-bool	bin_div(t_num *a, t_num *b, t_num **res, size_t save_len)
+bool	bin_mod(t_num *a, t_num *b, t_num **res, size_t save_len)
 {
 	ssize_t		q;
 
-	while (b->len >= save_len && !a->zero)
+	while (b->len >= save_len)
 	{
-		if (a->zero)
-			printf("zero\n");
 		q = 0;
 		while (a->sign == false)
 		{
-		//	printf("lol\n");
 			big_num_sub(a, b, &a);
 			q++;
 		}
@@ -32,22 +29,15 @@ bool	bin_div(t_num *a, t_num *b, t_num **res, size_t save_len)
 		if (!(shift_to_left(&b, 1)))
 			return (false);
 	}
-	*res = copy_reverse_num(*res);
-	if ((*res)->len == 1 && (*res)->num[0] == 0)
-		(*res)->zero = true;
+	*res = copy_num(a);
 	return (true);
 }
 
-bool	gest_div(t_num *a, t_num *b, t_num **res)
+bool	gest_mod(t_num *a, t_num *b, t_num **res)
 {
 	ssize_t			shift;
 	const size_t	save_len = b->len;
 
-	if (b->zero)
-	{
-		printf("Division par zero\n");
-		return (false);
-	}
 	(*res)->sign = a->sign ^ b->sign;
 	(*res)->len = 0;
 	a->sign = false;
@@ -55,12 +45,12 @@ bool	gest_div(t_num *a, t_num *b, t_num **res)
 	shift = (a->len -  b->len);
 	if (!shift_to_right(&b, shift))
 		return (false);
-	if (!(bin_div(a, b, res, save_len)))
+	if (!(bin_mod(a, b, res, save_len)))
 		return (false);
 	return (true);
 }
 
-bool	big_num_div(t_num *op1, t_num *op2, t_num **res)
+bool	big_num_mod(t_num *op1, t_num *op2, t_num **res)
 {
 	t_num	*a;
 	t_num	*b;
@@ -73,7 +63,7 @@ bool	big_num_div(t_num *op1, t_num *op2, t_num **res)
 		free(a);
 		return (false);
 	}
-	sucess = gest_div(a, b, res);
+	sucess = gest_mod(a, b, res);
 	free(a);
 	free(b);
 	return (sucess);

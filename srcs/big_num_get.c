@@ -31,7 +31,10 @@ void	big_num_atoi(const char *str, t_num **num)
 		op->len = 0;
 		i++;
 	}
-	(*num)->sign = c == '-' ? true : false;
+	if ((*num)->len == 1 && (*num)->num[0] == 0)
+		(*num)->zero = true;
+	else
+		(*num)->sign = c == '-' ? true : false;
 	free(op);
 }
 

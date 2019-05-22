@@ -21,7 +21,8 @@ t_num	*create_num(size_t capacity)
 	*num = (t_num){
 		.capacity = capacity,
 		.len = 0,
-		.sign = false
+		.sign = false,
+		.zero = false
 	};
 	ft_memset(num->num, 0, capacity * sizeof(uint8_t));
 	return (num);
@@ -44,23 +45,6 @@ bool	add_a_nbr(t_num **num, uint8_t c)
 	(*num)->num[(*num)->len] = c;
 	(*num)->len++;
 	return (true);
-}
-
-void	conv_in_int(t_num *op)
-{
-	ssize_t		i;
-	size_t		num;
-
-	num = 0;
-	i = op->len - 1;
-	if (op->sign)
-		printf("-");
-	while (i >= 0)
-	{
-		num = num * 256 + op->num[i];
-		i--;
-	}
-	printf("%ld\n", num);
 }
 
 int		main(int argc, const char *argv[])
@@ -86,7 +70,8 @@ int		main(int argc, const char *argv[])
 			big_num_mult(op1, op2, &op3);
 		if (argv[2][0] == '/')
 			big_num_div(op1, op2, &op3);
-		printf("%ld\n", op3->len);
+		if (argv[2][0] == '%')
+			big_num_mod(op1, op2, &op3);
 		conv_in_int(op3);
 	}
 	else

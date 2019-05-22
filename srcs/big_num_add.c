@@ -20,6 +20,12 @@ bool		bin_add(t_num *a, t_num *b, t_num **res, size_t len)
 
 	i = 0;
 	overflow = false;
+	if (a->zero && b->zero)
+	{
+		(*res)->zero = true;
+		(*res)->len = 1;
+		return (true);
+	}
 	while (i < len)
 	{
 		num = ((a->len > i ? a->num[i] : 0) + (b->len > i ? b->num[i] : 0)
@@ -60,11 +66,6 @@ bool		big_num_add(t_num *op1, t_num *op2, t_num **res)
 	t_num		*b;
 	bool		sucess;
 
-	printf("j'ai add\n");
-	conv_in_int(op1);
-	printf("[OP1] -> capacity %ld len %ld sign %s\n", op1->capacity, op1->len, op1->sign ? "-" : "+");
-	conv_in_int(op2);
-	printf("[OP2] -> capacity %ld len %ld sign %s\n", op2->capacity, op2->len, op2->sign ? "-" : "+");
 	if (!(a = copy_num(op1)))
 		return (false);
 	if (!(b = copy_num(op2)))
@@ -74,8 +75,6 @@ bool		big_num_add(t_num *op1, t_num *op2, t_num **res)
 	}
 	(*res)->len = 0;
 	sucess = gest_sign_add(a, b, res);
-	printf("res = ");
-	conv_in_int(*res);
 	free(a);
 	free(b);
 	return (sucess);
