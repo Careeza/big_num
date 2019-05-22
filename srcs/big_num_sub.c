@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:57:10 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 16:47:43 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:14:18 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool		trunc_zero_at_the_end(t_num **res)
 bool		bin_sub(t_num *a, t_num *b, t_num **res, size_t len)
 {
 	size_t		i;
-	uint16_t	num;
+	int16_t	num;
 	bool		overflow;
 	t_num		*sign;
 
@@ -35,9 +35,9 @@ bool		bin_sub(t_num *a, t_num *b, t_num **res, size_t len)
 	{
 		num = ((a->len > i ? a->num[i] : 0) - (b->len > i ? b->num[i] : 0)
 				- overflow);
-		if (!(add_a_nbr(res, num % 256)))
+		if (!(add_a_nbr(res, num < 0 ? num + 10 : num)))
 			return (false);
-		overflow = num >= 256;
+		overflow = num < 0;
 		i++;
 	}
 	if (overflow)

@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 09:33:43 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 16:40:13 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:05:23 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	add_a_nbr(t_num **num, uint8_t c)
 {
 	size_t	new_capacity;
 
-	if ((*num)->len >= (*num)->capacity)
+	while ((*num)->len >= (*num)->capacity)
 	{
 		new_capacity = (*num)->capacity * 2;
 		if (!(*num = realloc(*num, sizeof(t_num)
@@ -49,10 +49,14 @@ bool	add_a_nbr(t_num **num, uint8_t c)
 
 int		main(int argc, const char *argv[])
 {
-	t_num *op1;
-	t_num *op2;
-	t_num *op3;
+	t_num	*op1;
+	t_num	*op2;
+	t_num	*op3;
+	char	aff[4];
 
+	aff[0] = ' ';
+	aff[2] = ' ';
+	aff[3] = '\0';
 	op1 = create_num(LEN_NBR);
 	op2 = create_num(LEN_NBR);
 	op3 = create_num(LEN_NBR);
@@ -60,8 +64,9 @@ int		main(int argc, const char *argv[])
 	{
 		big_num_atoi(argv[1], &op1);
 		big_num_atoi(argv[3], &op2);
-		conv_in_int(op1);
-		conv_in_int(op2);
+		aff[1] = argv[2][0];
+		aff_big_num(op1, aff);
+		aff_big_num(op2, " == ");
 		if (argv[2][0] == '-')
 			big_num_sub(op1, op2, &op3);
 		if (argv[2][0] == '+')
@@ -72,13 +77,12 @@ int		main(int argc, const char *argv[])
 			big_num_div(op1, op2, &op3);
 		if (argv[2][0] == '%')
 			big_num_mod(op1, op2, &op3);
-		conv_in_int(op3);
+		aff_big_num(op3, "\n");
 	}
 	else
 	{
 		big_num_atoi(argv[1], &op1);
-		shift_to_left(&op1, 1);
-		conv_in_int(op1);
+		aff_big_num(op1, "\n");
 	}
 	return (0);
 }

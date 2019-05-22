@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:54:41 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 14:56:38 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 16:09:36 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_num	*copy_reverse_num(t_num *num)
 	copy->len = num->len;
 	copy->sign = num->sign;
 	copy->zero = num->zero;
+	free(num);
 	return (copy);
 }

@@ -6,13 +6,13 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 10:43:45 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 11:10:43 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:05:02 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "num.h"
 
-bool	bin_mult(t_num *a, t_num *b, t_num *c, t_num **res)
+bool	bin_mult(t_num *a, t_num *b, t_num **c, t_num **res)
 {
 	size_t		i;
 	size_t		j;
@@ -33,16 +33,20 @@ bool	bin_mult(t_num *a, t_num *b, t_num *c, t_num **res)
 		while (++j < b->len)
 		{
 			num = a->num[i] * b->num[j] + overflow;
-			if (!(add_a_nbr(&c, num % 256)))
+			if (!(add_a_nbr(c, num % 10)))
 				return (false);
-			overflow = num / 256;
+			overflow = num / 10;
 		}
 		if (overflow != 0)
-			if (!(add_a_nbr(&c, overflow)))
+		{
+//			printf("overflow\n");
+			if (!(add_a_nbr(c, overflow)))
 				return (false);
-		if (!(bin_add(*res, c, res, c->len)))
+		}
+		if (!(big_num_add(*res, *c, res)))
 			return (false);
-		c->len = i + 1;
+		ft_memset((*c)->num, 0, i + 1);
+		(*c)->len = i + 1;
 	}
 	return (true);
 }
@@ -59,9 +63,9 @@ bool	gest_mult(t_num *a, t_num *b, t_num **res)
 	a->sign = false;
 	b->sign = false;
 	if (a->len > b->len)
-		sucess = bin_mult(b, a, c, res);
+		sucess = bin_mult(b, a, &c, res);
 	else
-		sucess = bin_mult(a, b, c, res);
+		sucess = bin_mult(a, b, &c, res);
 	free(c);
 	return (sucess);
 }

@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 10:00:36 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 15:24:14 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:32:31 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ bool		bin_add(t_num *a, t_num *b, t_num **res, size_t len)
 	}
 	while (i < len)
 	{
+//		printf("capacity %ld -- len %ld <==> ", a->capacity, a->len);
+//		printf("capacity %ld -- len %ld\n", b->capacity, b->len);
 		num = ((a->len > i ? a->num[i] : 0) + (b->len > i ? b->num[i] : 0)
 				+ overflow);
-		if (!(add_a_nbr(res, num % 256)))
+		if (!(add_a_nbr(res, num % 10)))
 			return (false);
-		overflow = num >= 256;
+		overflow = num >= 10;
 		i++;
 	}
 	overflow ? add_a_nbr(res, 1) : 0;

@@ -6,14 +6,14 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 09:31:41 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/20 14:57:35 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:03:34 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NUM_H
 
 # define NUM_H
-# define LEN_NBR 512
+# define LEN_NBR 1
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -35,6 +35,8 @@ t_num	*copy_reverse_num(t_num *num);
 
 t_num	*create_num_with_1_at_end(size_t len);
 void	big_num_atoi(const char *str, t_num **num);
+
+void	aff_big_num(t_num *res, const char *str);
 
 void	conv_in_int(t_num *op);
 void	aff_param(t_num *op, char *name);

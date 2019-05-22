@@ -12,24 +12,20 @@ void	aff_param(t_num *op, char *name)
 	printf("---------END----------\n");
 }
 
-void	aff_big_num(t_num *res)
+void	aff_big_num(t_num *res, const char *str)
 {
-	t_num *a;
-	t_num *b;
-	t_num *mod;
+	ssize_t	i;
 
-	a = create_num(LEN_NBR);
-	mod = create_num(LEN_NBR);
-	b = copy_num(res);
-	a->len = 1;
-	a->num[1] = 10;
-	while (!b->zero)
+	i = res->len;
+	i--;
+	if (res->sign)
+		printf("-");
+	while (i >= 0)
 	{
-		big_num_mod(b, a, &mod);
-		printf("%d-", mod->num[0]);
-		big_num_div(b, a, &b);
+		printf("%d", res->num[i]);
+		i--;
 	}
-	printf("\n");
+	printf("%s", str);
 }
 
 
