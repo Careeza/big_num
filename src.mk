@@ -1,11 +1,13 @@
 SRCS += srcs/big_num.c
 SRCS += srcs/big_num_add.c
+SRCS += srcs/big_num_aff.c
+SRCS += srcs/big_num_conv.c
 SRCS += srcs/big_num_div.c
 SRCS += srcs/big_num_get.c
+SRCS += srcs/big_num_mod.c
 SRCS += srcs/big_num_mult.c
+SRCS += srcs/big_num_pow.c
 SRCS += srcs/big_num_sub.c
 SRCS += srcs/copy.c
 SRCS += srcs/shift.c
 SRCS += srcs/string.c
-SRCS += srcs/big_num_mod.c
-SRCS += srcs/big_num_aff.c

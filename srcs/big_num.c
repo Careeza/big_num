@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 09:33:43 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/22 15:05:23 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:04:14 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ bool	add_a_nbr(t_num **num, uint8_t c)
 	return (true);
 }
 
+/*
 int		main(int argc, const char *argv[])
 {
 	t_num	*op1;
@@ -77,6 +78,8 @@ int		main(int argc, const char *argv[])
 			big_num_div(op1, op2, &op3);
 		if (argv[2][0] == '%')
 			big_num_mod(op1, op2, &op3);
+		if (argv[2][0] == '^')
+			big_num_pow(op1, op2, &op3);
 		aff_big_num(op3, "\n");
 	}
 	else
@@ -85,4 +88,4 @@ int		main(int argc, const char *argv[])
 		aff_big_num(op1, "\n");
 	}
 	return (0);
-}
+}*/

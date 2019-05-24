@@ -6,71 +6,50 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 10:43:45 by fbecerri          #+#    #+#             */
-/*   Updated: 2019/05/22 16:12:23 by fbecerri         ###   ########.fr       */
+/*   Updated: 2019/05/22 16:31:17 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "num.h"
 
-bool	bin_mult(t_num *a, t_num *b, t_num **c, t_num **res)
+bool	bin_pow(t_num *a, size_t num, t_num **res)
 {
-	size_t		i;
-	size_t		j;
-	uint16_t	num;
-	uint16_t	overflow;
+	size_t	i;
 
-	i = -1;
-	if (a->zero || b->zero)
+	i = 0;
+	while (i < num)
 	{
-		(*res)->len = 1;
-		(*res)->zero = true;
-		return (true);
-	}
-	while (++i < a->len)
-	{
-		j = -1;
-		overflow = 0;
-		while (++j < b->len)
-		{
-			num = a->num[i] * b->num[j] + overflow;
-			if (!(add_a_nbr(c, num % 10)))
-				return (false);
-			overflow = num / 10;
-		}
-		if (overflow != 0)
-		{
-//			printf("overflow\n");
-			if (!(add_a_nbr(c, overflow)))
-				return (false);
-		}
-		if (!(big_num_add(*res, *c, res)))
-			return (false);
-		ft_memset((*c)->num, 0, i + 1);
-		(*c)->len = i + 1;
+		big_num_mult(a, *res, res);
+		i++;
 	}
 	return (true);
 }
 
-bool	gest_mult(t_num *a, t_num *b, t_num **res)
+bool	gest_pow(t_num *a, t_num *b, t_num **res)
 {
-	t_num		*c;
 	bool		sucess;
+	ssize_t		num;
 
-	if (!(c = create_num(LEN_NBR)))
+	(*res)->len = 1;
+	(*res)->num[0] = 1;
+	if ((num = conv_in_int(b)) == -1)
+	{
+		printf("to big\n");
 		return (false);
-	(*res)->sign = a->sign ^ b->sign;
-	(*res)->len = 0;
+	}
+	if (b->sign)
+	{
+		printf("no gest of neg\n");
+		return (false);
+	}
+	(*res)->sign = a->sign * (num % 2);
 	a->sign = false;
 	b->sign = false;
-	if (a->len > b->len)
-		sucess = bin_mult(b, a, &c, res);
-	else
-		sucess = bin_mult(a, b, &c, res);
-	free(c);
+	sucess = bin_pow(a, num, res);
 	return (sucess);
 }
 
-bool	big_num_mult(t_num *op1, t_num *op2, t_num **res)
+bool	big_num_pow(t_num *op1, t_num *op2, t_num **res)
 {
 	t_num	*a;
 	t_num	*b;
@@ -83,7 +62,7 @@ bool	big_num_mult(t_num *op1, t_num *op2, t_num **res)
 		free(a);
 		return (false);
 	}
-	sucess = gest_mult(a, b, res);
+	sucess = gest_pow(a, b, res);
 	free(a);
 	free(b);
 	return (sucess);

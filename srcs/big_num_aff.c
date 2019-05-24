@@ -8,7 +8,7 @@ void	aff_param(t_num *op, char *name)
 	printf("len = %ld\n", op->len);
 	printf("sign = %s\n", !op->sign ? "positif" : "negatif");
 	printf("num = ");
-	conv_in_int(op);
+	aff_big_num(op, "\n");
 	printf("---------END----------\n");
 }
 
@@ -27,24 +27,3 @@ void	aff_big_num(t_num *res, const char *str)
 	}
 	printf("%s", str);
 }
-
-
-void	conv_in_int(t_num *op)
-{
-	ssize_t		i;
-	size_t		num;
-
-	if (op->zero)
-		printf("zero\n");
-	num = 0;
-	i = op->len - 1;
-	if (op->sign)
-		printf("-");
-	while (i >= 0)
-	{
-		num = num * 256 + op->num[i];
-		i--;
-	}
-	printf("%ld\n", num);
-}
-
